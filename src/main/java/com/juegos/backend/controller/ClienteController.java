@@ -36,7 +36,7 @@ public class ClienteController {
 		return new ResponseEntity(lista, HttpStatus.OK);
 	}
 	
-	@PostMapping("/crear/")
+	@PostMapping("/crear")
 	public ResponseEntity<?> crearCliente(@RequestBody ClienteDto clienteDto){
 		
 		if(StringUtils.isAllBlank(clienteDto.getNombreCompleto()))
@@ -49,8 +49,11 @@ public class ClienteController {
 			return new ResponseEntity(new Mensaje("El telefono es obligatorio"),HttpStatus.BAD_REQUEST);	
 		
 		if(clienteService.existePorNombre(clienteDto.getNombreCompleto()))
-			return new ResponseEntity(new Mensaje("Este nombre ya existe"),HttpStatus.BAD_REQUEST);
-			
+			return new ResponseEntity(new Mensaje("El nombre digitado  ya existe"),HttpStatus.BAD_REQUEST);
+		
+		if(clienteService.existePorDocumento(clienteDto.getDocumento()))
+			return new ResponseEntity(new Mensaje("El documento digitado ya existe"),HttpStatus.BAD_REQUEST);
+		
 		Cliente cliente = new Cliente(clienteDto.getCorreo(),clienteDto.getDocumento(),clienteDto.getNombreCompleto(),
 				clienteDto.getTelefono(),clienteDto.getTipoDocumento());
 		cliente.setCorreo(clienteDto.getCorreo());

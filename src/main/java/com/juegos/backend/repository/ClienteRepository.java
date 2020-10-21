@@ -12,5 +12,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	
 	Optional<Cliente>findByNombreCompleto(String nombre);
     boolean existsByNombreCompleto(String nombre);
+    boolean existsByDocumento(String documento);
 
 }

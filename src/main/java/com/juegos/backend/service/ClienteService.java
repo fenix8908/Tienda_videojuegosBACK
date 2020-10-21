@@ -28,5 +28,9 @@ public class ClienteService {
 	public boolean existePorNombre(String nombre) {
 		return clienteRepository.existsByNombreCompleto(nombre);
 	}
+	
+	public boolean existePorDocumento(String documento) {
+		return clienteRepository.existsByDocumento(documento);
+	}
 
 }
