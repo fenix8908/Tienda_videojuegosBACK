@@ -1,5 +1,7 @@
 package com.juegos.backend.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.juegos.backend.enums.Tecnologia;
 
@@ -25,14 +28,15 @@ public class VideoJuego {
 	@Enumerated(EnumType.STRING)
 	private Tecnologia tecnologia;
 	private String marca;
-	private double precioAlquiler;
+	private double precioJuego;
+	private int stock;
 	
 	public VideoJuego() {
 		
 	}
 
 	public VideoJuego(String nombre, String anio, String protagonista, String director, String productor,
-			Tecnologia tecnologia, String marca, double precioAlquiler) {
+			Tecnologia tecnologia, String marca, double precioJuego, int stock) {
 		this.nombre = nombre;
 		this.anio = anio;
 		this.protagonista = protagonista;
@@ -40,7 +44,8 @@ public class VideoJuego {
 		this.productor = productor;
 		this.tecnologia = tecnologia;
 		this.marca = marca;
-		this.precioAlquiler = precioAlquiler;
+		this.precioJuego = precioJuego;
+		this.stock = stock;
 	}
 
 	public int getId() {
@@ -108,12 +113,21 @@ public class VideoJuego {
 	}
 
 	public double getPrecioAlquiler() {
-		return precioAlquiler;
+		return precioJuego;
 	}
 
 	public void setPrecioAlquiler(double precioAlquiler) {
-		this.precioAlquiler = precioAlquiler;
+		this.precioJuego = precioAlquiler;
 	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
 	
 	
 }

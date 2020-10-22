@@ -1,9 +1,12 @@
 package com.juegos.backend.entity;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 @Entity
 public class Cliente {
@@ -15,7 +18,6 @@ public class Cliente {
 	private String tipoDocumento;
 	private String nombreCompleto;
 	private String telefono;
-	
 	private String correo;
 
 	public Cliente(){
