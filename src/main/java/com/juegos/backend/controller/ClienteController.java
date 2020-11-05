@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +34,21 @@ public class ClienteController {
 	public ResponseEntity<List<Cliente>> listarClientes(){
 		
 		List<Cliente> lista = clienteService.listaClientes();
-		return new ResponseEntity(lista, HttpStatus.OK);
+		return new ResponseEntity<>(lista, HttpStatus.OK);
+	}
+	
+	@GetMapping("/detalle/{id}")
+	public ResponseEntity<Cliente>obtenerPorid(@PathVariable("id") int id){
+		
+		if(!clienteService.existePorId(id)) {
+			return new ResponseEntity(new Mensaje("este cliente ni existe"),HttpStatus.BAD_REQUEST);
+		}
+		Cliente cliente = clienteService.obtenerPorId(id).get();
+		return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
 	}
 	
 	@PostMapping("/crear")
-	public ResponseEntity<?> crearCliente(@RequestBody ClienteDto clienteDto){
+	public ResponseEntity<Cliente> crearCliente(@RequestBody ClienteDto clienteDto){
 		
 		if(StringUtils.isAllBlank(clienteDto.getNombreCompleto()))
 			return new ResponseEntity(new Mensaje("El nombre es obligatorio"),HttpStatus.BAD_REQUEST);

@@ -20,13 +20,16 @@ public class VideoJuegoService extends QueryService<VideoJuego> {
 
 	@Autowired
 	JuegoRepository juegoRepository;
+	
+	public List<VideoJuego>getAllGames(){
+		return this.juegoRepository.findAll();
+	}
 
 	public List<VideoJuego> buscarPorCriterio(CriterioBusqueda criterioBusqueda) {
 		final Specification<VideoJuego> specification = crearEspecificacion(criterioBusqueda);
 		List<VideoJuego> juegos = juegoRepository.findAll(specification);
 		return juegos;
 	}
-
 	private Specification<VideoJuego> crearEspecificacion(CriterioBusqueda criterio) {
 		Specification<VideoJuego> specification = Specification.where(null);
 		if (criterio != null) {

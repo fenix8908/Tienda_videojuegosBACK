@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.juegos.backend.entity.Alquiler;
+
 import com.juegos.backend.repository.AlquilerRepository;
+
 
 @Service
 @Transactional
@@ -22,13 +24,9 @@ public class AlquilerService {
 		return alquilerRepository.findAll();
 	}
 
-	public void alquilarJuego(Alquiler alquiler) {
-		alquilerRepository.save(alquiler);
+	public Alquiler save(Alquiler alquiler) {
+		return alquilerRepository.save(alquiler);
 	}
 	
-	public List<String>quienAlquilo(){
-		return this.alquilerRepository.quienAlquiloJuegoNativo();
-	}
-	
-	
+
 }

@@ -1,17 +1,17 @@
 package com.juegos.backend.dto;
 
 public class Mensaje {
-    private String mensaje;
+    private String  message;
 
     public Mensaje(String mensaje) {
-        this.mensaje = mensaje;
+        this.message = mensaje;
     }
 
     public String getMensaje() {
-        return mensaje;
+        return message;
     }
 
     public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+        this.message = mensaje;
     }
 }

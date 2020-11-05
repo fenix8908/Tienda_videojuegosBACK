@@ -7,7 +7,6 @@ public class ClienteDto {
 	private String nombreCompleto;
 	private String telefono;
 	private String correo;
-	
 	public ClienteDto() {
 		
 	}

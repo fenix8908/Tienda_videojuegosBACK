@@ -30,13 +30,15 @@ public class VideoJuego {
 	private String marca;
 	private double precioJuego;
 	private int stock;
+	@OneToMany(mappedBy = "videoJuego")
+	private List<Alquiler>alquileres;
 	
 	public VideoJuego() {
 		
 	}
 
 	public VideoJuego(String nombre, String anio, String protagonista, String director, String productor,
-			Tecnologia tecnologia, String marca, double precioJuego, int stock) {
+			Tecnologia tecnologia, String marca, double precioJuego, int stock, List<Alquiler> alquileres) {
 		this.nombre = nombre;
 		this.anio = anio;
 		this.protagonista = protagonista;
@@ -46,6 +48,25 @@ public class VideoJuego {
 		this.marca = marca;
 		this.precioJuego = precioJuego;
 		this.stock = stock;
+		this.alquileres = alquileres;
+	}
+	
+	
+
+	public double getPrecioJuego() {
+		return precioJuego;
+	}
+
+	public void setPrecioJuego(double precioJuego) {
+		this.precioJuego = precioJuego;
+	}
+
+	public List<Alquiler> getAlquileres() {
+		return alquileres;
+	}
+
+	public void setAlquileres(List<Alquiler> alquileres) {
+		this.alquileres = alquileres;
 	}
 
 	public int getId() {

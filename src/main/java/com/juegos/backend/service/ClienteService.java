@@ -1,6 +1,7 @@
 package com.juegos.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,14 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 
+	public Optional<Cliente> obtenerPorId(int id){
+		return this.clienteRepository.findById(id);
+	}
+	
+	public boolean existePorId(int id) {
+		return this.clienteRepository.existsByid(id);
+	}
+	
 	public void guardarCliente(Cliente cliente) {
 		clienteRepository.save(cliente);
 	}

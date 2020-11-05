@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.juegos.backend.criterios.CriterioBusqueda;
-import com.juegos.backend.criterios.CriterioBusqueda.TecnoFilter;
 import com.juegos.backend.dto.BusquedaDTO;
 import com.juegos.backend.entity.VideoJuego;
 import com.juegos.backend.enums.Tecnologia;
@@ -28,6 +28,12 @@ public class VideoJuegoController {
 
 	@Autowired
 	VideoJuegoService videoJuegoService;
+	
+	@GetMapping("/listado")
+	public ResponseEntity<List<VideoJuego>>listaJuegos(){
+		List<VideoJuego> lista= videoJuegoService.getAllGames();
+		return new ResponseEntity<List<VideoJuego>>(lista,HttpStatus.OK);
+	}
 
 	@PostMapping("/lista")
 	public ResponseEntity<List<VideoJuego>> obtenerJuegos(@RequestBody BusquedaDTO busquedaDTO) {
