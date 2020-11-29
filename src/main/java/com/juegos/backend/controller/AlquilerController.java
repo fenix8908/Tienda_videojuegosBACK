@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.juegos.backend.dto.Mensaje;
 import com.juegos.backend.entity.Alquiler;
 
 import com.juegos.backend.exception.ResourceNotFoundException;
@@ -44,11 +46,12 @@ public class AlquilerController {
 	}
 	
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/alquiler/cliente/{fk_cliente}/juego/{fk_juego}")
-	public Alquiler crearAlquiler(@RequestBody Alquiler alquiler,
+	public ResponseEntity<Alquiler> crearAlquiler(@RequestBody Alquiler alquiler,
 			@PathVariable(value = "fk_cliente")Integer fk_cliente,@PathVariable(value = "fk_juego")Integer fk_juego) {
 		
-		this.alquiler = alquiler;
+		this.alquiler = alquiler;	
 		clienteRepository.findById(fk_cliente).map((cliente) ->{
 			this.alquiler.setCliente(cliente);
 			return this.alquiler;
@@ -59,7 +62,8 @@ public class AlquilerController {
 			return this.alquiler;
 		}).orElseThrow(() ->new ResourceNotFoundException("VideoJuego", "id", fk_juego));
 		
-		return alquilerService.save(alquiler);
+		alquilerService.save(alquiler);
+		return new ResponseEntity(new Mensaje("alquiler creado"),HttpStatus.OK);
 	}
 
 }

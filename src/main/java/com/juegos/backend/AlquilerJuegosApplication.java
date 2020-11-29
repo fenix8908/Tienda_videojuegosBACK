@@ -8,6 +8,8 @@ public class AlquilerJuegosApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AlquilerJuegosApplication.class, args);
+		
+		
 	}
 
 }

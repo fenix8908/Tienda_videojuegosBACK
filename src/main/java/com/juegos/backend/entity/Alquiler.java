@@ -30,11 +30,11 @@ public class Alquiler implements Serializable {
 	private Date fechaEntrega;
 	private double precioAlquiler;
 	@JoinColumn(name = "fk_cliente")
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JsonIgnoreProperties("alquileres")
 	private Cliente cliente;
 	@JoinColumn(name = "fk_juego")
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
+	@ManyToOne(fetch = FetchType.EAGER,optional = false)
 	@JsonIgnoreProperties("alquileres")
 	private VideoJuego videoJuego;
 
